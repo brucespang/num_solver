@@ -13,7 +13,7 @@ def solve_num_problem(utility, R, capacity):
     res = scipy.optimize.minimize(f, x0,
                                   bounds=[(0., None) for _ in x0],
                                   constraints=[{'type': 'ineq',
-                                                'fun': lambda x: capacity - np.dot(R, x)}])
+                                                'fun': lambda x: np.asarray(capacity - np.dot(R, x)).flatten()}])
 
     if not res.success:
         print res
