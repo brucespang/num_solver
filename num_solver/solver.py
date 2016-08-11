@@ -1,7 +1,7 @@
 import scipy.optimize
 import numpy as np
 
-def solve_num_problem(utility, R, capacity):
+def solve_num_problem(utility, R, capacity, maxiter=1000):
     num_resources,num_flows = R.shape
 
     # the scipy solver has problems if the capacity of any link is zero
@@ -13,7 +13,10 @@ def solve_num_problem(utility, R, capacity):
     res = scipy.optimize.minimize(f, x0,
                                   bounds=[(0., None) for _ in x0],
                                   constraints=[{'type': 'ineq',
-                                                'fun': lambda x: np.asarray(capacity - np.dot(R, x)).flatten()}])
+                                                'fun': lambda x: np.asarray(capacity - np.dot(R, x)).flatten()}],
+                                  options={
+                                      'maxiter': maxiter
+                                  })
 
     if not res.success:
         print res
