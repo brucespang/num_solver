@@ -15,6 +15,15 @@ class TestNUM(unittest.TestCase):
         self.assertTrue(abs(5. - res[0]) < DELTA)
         self.assertTrue(abs(5. - res[1]) < DELTA)
 
+    def test_solve_alias(self):
+        utility = lambda x: np.sum(np.ma.log(x))
+        R = np.array([[1., 1.]])
+        capacity = np.array([10.])
+
+        res = solve(utility, R, capacity)
+        self.assertTrue(abs(5. - res[0]) < DELTA)
+        self.assertTrue(abs(5. - res[1]) < DELTA)
+
     def test_unequal_shared_link(self):
         w = np.array([1., 2.])
         utility = lambda x: np.dot(w, np.ma.log(x))

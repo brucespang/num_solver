@@ -23,3 +23,6 @@ def solve_num_problem(utility, R, capacity, maxiter=1000):
         raise Exception("Couldn't solve NUM problem")
 
     return res.x
+
+def solve(*args):
+    return solve_num_problem(*args)
