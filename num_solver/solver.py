@@ -38,5 +38,5 @@ def solve_num_problem(utility, R, c, maxiter=1000, tol=1e-10, x0=None):
     rates = rates(res.x)
     return rates
 
-def solve(*args):
-    return solve_num_problem(*args)
+def solve(*args, **kwargs):
+    return solve_num_problem(*args, **kwargs)

@@ -20,7 +20,7 @@ class TestNUM(unittest.TestCase):
         R = np.array([[1., 1.]])
         capacity = np.array([10.])
 
-        res = solve(utility, R, capacity)
+        res = solve(utility, R, capacity, tol=1e-5)
         self.assertTrue(abs(5. - res[0]) < DELTA)
         self.assertTrue(abs(5. - res[1]) < DELTA)
 
