@@ -7,7 +7,7 @@ DELTA = 0.01
 
 class TestNUM(unittest.TestCase):
     def test_equal_shared_link(self):
-        utility = lambda x: np.sum(np.ma.log(x))
+        utility = proportionally_fair()
         R = np.array([[1., 1.]])
         capacity = np.array([10.])
 
@@ -16,7 +16,7 @@ class TestNUM(unittest.TestCase):
         self.assertTrue(abs(5. - res[1]) < DELTA)
 
     def test_solve_alias(self):
-        utility = lambda x: np.sum(np.ma.log(x))
+        utility = proportionally_fair()
         R = np.array([[1., 1.]])
         capacity = np.array([10.])
 
@@ -26,7 +26,7 @@ class TestNUM(unittest.TestCase):
 
     def test_unequal_shared_link(self):
         w = np.array([1., 2.])
-        utility = lambda x: np.dot(w, np.ma.log(x))
+        utility = weighted_log(w)
         R = np.array([[1., 1.]])
         capacity = np.array([9.])
 
@@ -36,7 +36,7 @@ class TestNUM(unittest.TestCase):
 
     def test_unshared_link(self):
         w = np.array([1., 2.])
-        utility = lambda x: np.dot(w, np.ma.log(x))
+        utility = weighted_log(w)
         R = np.array([[1., 0.], [0., 1.]])
         capacity = np.array([10., 10.])
 
@@ -46,7 +46,7 @@ class TestNUM(unittest.TestCase):
 
     def test_zero_capacity(self):
         w = np.array([1., 2.])
-        utility = lambda x: np.dot(w, np.ma.log(x))
+        utility = weighted_log(w)
         R = np.array([[1., 0.], [0., 1.]])
         capacity = np.array([10., 0.])
 
@@ -63,10 +63,15 @@ class TestNUM(unittest.TestCase):
                        [1., 0., 1.],
                        [1., 1., 1.]])
         capacity = np.array([30., 5., 30., 20., 10., 10., 20.])
-        utility = lambda x: np.sum(np.ma.log(x))
+        utility = proportionally_fair()
 
         solve_num_problem(utility, R, capacity)
 
+    def test_large_weights(self):
+        w = [1.,20.]
+        R = [[1,1]]
+        c = [10]
+        solve_num_problem(weighted_log(w), R, c)
 
 if __name__ == '__main__':
     unittest.main()

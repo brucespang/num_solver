@@ -2,7 +2,7 @@ all: test build upload
 
 .PHONY: test
 test:
-	PYTHONPATH=. python test/*.py
+	PYTHONPATH=. find test/ -name '*.py' -exec python {} \;
 
 .PHOHNY: clean
 clean:
