@@ -7,8 +7,9 @@ def solve_num_problem(utility, R, c, maxiter=1000, tol=1e-10, x0=None):
 
     num_links,num_flows = R.shape[0],R.shape[1]
     if x0 is None:
-        x0 = np.array([1.]*(num_flows+num_links))
-
+        x0 = np.array([1. for _ in range(num_flows+num_links)])
+    else:
+        x0 = np.array(x0 + [1. for _ in range(num_links)])
     # the scipy solver has problems if the capacity of any link is zero
     c = c.clip(min=1e-5)
 

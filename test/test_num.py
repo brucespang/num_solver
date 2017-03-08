@@ -73,5 +73,10 @@ class TestNUM(unittest.TestCase):
         c = [10]
         solve_num_problem(weighted_log(w), R, c)
 
+    def test_x0(self):
+        R = [[1,1]]
+        c = [10]
+        solve_num_problem(proportionally_fair(), R, c, x0=[1,2])
+
 if __name__ == '__main__':
     unittest.main()
